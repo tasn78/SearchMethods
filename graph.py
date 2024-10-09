@@ -3,23 +3,28 @@ import networkx as nx
 
 from collections import defaultdict
 
+
 # Creates graphs based on dictionary of cities and connections
+# Used prior code (below) to update graph - see commented section below
 class Graph:
     def __init__(self):
         self.graph = defaultdict(list)
         self.city_coords = {}
 
-    # Connects cities
+    # Connects the cities
     def add_edge(self, city1, city2):
         self.graph[city1].append(city2)
         self.graph[city2].append(city1)  # Symmetrical connection
 
+    # Sets city coordinates
     def set_city_coords(self, coords):
         self.city_coords = coords
 
+    # Gets neighboring cities
     def get_neighbors(self, city):
         return self.graph[city]
 
+    # Gets city coordinates
     def get_city_coordinates(self, city):
         return self.city_coords.get(city, None)
 
@@ -67,6 +72,7 @@ class Graph:
 
 '''
     # Created to show all algorithms on the same graph, but was too difficult to read due to overlapping
+    # CHatGPT - Input this code to create the code above to make 1 graph per algorithm used "How do I change this code to only show one algorithm at a time?"
     def plot_graph(self, paths_by_algorithm=None):
         G = nx.Graph()
 
