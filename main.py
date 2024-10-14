@@ -13,7 +13,7 @@ def main():
     city_coords = data_loader.load_coordinates()
     adjacency_list = data_loader.load_adjacency_list()
 
-    # Sets up the graph
+    # Sets up the graph for visual
     graph = Graph()
     for city1 in adjacency_list:
         for city2 in adjacency_list[city1]:

@@ -8,6 +8,7 @@ class DataLoader:
         self.coordinates_file = coordinates_file
         self.adjacency_file = adjacency_file
 
+    # Dictionary of coordinates, tuple of two floats for latitude and longitude
     def load_coordinates(self):
         city_coords = {}
         data = pd.read_csv(self.coordinates_file, sep=",", header=None)
