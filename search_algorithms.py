@@ -1,6 +1,9 @@
 # Search algorithms the user can choose from
 import heapq
 
+import networkx as nx
+
+
 class SearchAlgorithms:
     @staticmethod
     def bfs(graph, start, goal):
@@ -8,7 +11,7 @@ class SearchAlgorithms:
         queue = [[start]]  # Queue of paths to explore
 
         # If the start and goal are the same, return the path immediately
-        if start == goal: # Updated after unit test test_no_path
+        if start == goal:  # Updated after unit test test_no_path
             return [start]
 
         while queue:
@@ -19,11 +22,17 @@ class SearchAlgorithms:
                 return path
 
             if node not in visited:
-                visited.add(node)  # Mark the node as visited
-                # Enqueue all neighbors of the current node
-                for neighbor in graph.get_neighbors(node):
+                visited.add(node)
+                # Check if the graph is an instance of your custom Graph class or a networkx.Graph
+                # Updated using ChatGPT when implementing networkx_comparison.py
+                if isinstance(graph, nx.Graph):
+                    neighbors = graph.neighbors(node)  # Use networkx neighbors method
+                else:
+                    neighbors = graph.get_neighbors(node)  # Use custom Graph get_neighbors method
+
+                for neighbor in neighbors:
                     if neighbor not in visited:
-                        new_path = list(path)  # Create a new path with the neighbor
+                        new_path = list(path)
                         new_path.append(neighbor)
                         queue.append(new_path)
 
@@ -43,7 +52,14 @@ class SearchAlgorithms:
 
             if node not in visited:
                 visited.add(node)
-                for neighbor in graph.get_neighbors(node):
+                # Added from ChatGPT during implementation of networkx_comparison.py
+                # Check if the graph is an instance of networkx.Graph or your custom Graph class
+                if isinstance(graph, nx.Graph):
+                    neighbors = graph.neighbors(node)  # Use networkx method
+                else:
+                    neighbors = graph.get_neighbors(node)  # Use custom Graph method
+
+                for neighbor in neighbors:
                     new_path = list(path)
                     new_path.append(neighbor)
                     stack.append(new_path)
@@ -107,7 +123,14 @@ class SearchAlgorithms:
 
             if node not in visited:
                 visited.add(node)
-                for neighbor in graph.get_neighbors(node):
+                # Used ChatGPT - added when implementing networkx.comparison
+                # Check if the graph is an instance of networkx.Graph or your custom Graph class
+                if isinstance(graph, nx.Graph):
+                    neighbors = graph.neighbors(node)  # Use networkx method
+                else:
+                    neighbors = graph.get_neighbors(node)  # Use custom Graph method
+
+                for neighbor in neighbors:
                     tentative_g_score = g_score[node] + 1  # Assuming equal edge cost
                     if tentative_g_score < g_score.get(neighbor, float('inf')):
                         g_score[neighbor] = tentative_g_score

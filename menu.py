@@ -5,7 +5,8 @@ import time
 import tracemalloc  # For memory tracking
 from utils import create_euclidean_distance, print_path
 
-
+# Main menu for user to choose their search algorithm or exit
+# Loops so that multiple algorithms can be compared
 def choose_algorithm():
     while True:
         try:
@@ -26,6 +27,7 @@ def choose_algorithm():
             print("Invalid input. Please enter a number between 1 and 6.")
 
 
+# City selection is case-sensitive, must match exactly as in list
 def select_cities(graph):
     while True:
         start_city = input("Enter the starting city: ")
@@ -39,6 +41,7 @@ def select_cities(graph):
         else:
             return start_city, goal_city
 
+
 # Runs search based on user choice
 def run_search(graph, start_city, goal_city):
     # Uses euclidean distance to compute direct distance between the 2 cities
@@ -47,7 +50,7 @@ def run_search(graph, start_city, goal_city):
     while True:
         algorithm_choice = choose_algorithm()
 
-        # Measure time taken
+        # Measures time taken
         start_time = time.time()
 
         # Start memory tracking
@@ -75,19 +78,20 @@ def run_search(graph, start_city, goal_city):
             print("Exiting algorithm selection.")
             break
 
-        # Stop memory tracking and get memory usage
+        # Stop memory tracking and get memory usage - added using ChatGPT asking "How do I measure the memory
+        # used by the algorithms?, also provided all code from menu.py"
         current, peak = tracemalloc.get_traced_memory()
         tracemalloc.stop()
 
         end_time = time.time()
 
-        # Display the path
+        # Prints the path, time and memory usage
         if path:
             print("\nPath found:")
             print_path(path)
             print(f"Time taken: {end_time - start_time:.4f} seconds")
-            print(f"Memory used: {current / 1024:.2f} KB")
-            print(f"Peak memory usage: {peak / 1024:.2f} KB")
+            print(f"Memory used: {current / 1024:.2f} KB") # From ChatGPT in comment above
+            print(f"Peak memory usage: {peak / 1024:.2f} KB") # From ChatGPT in comment above
 
             # Calculate the total distance
             total_distance = 0
@@ -198,7 +202,7 @@ def run_search(graph, start_city, goal_city):
         run_search(graph, start_city, goal_city)  # Recursive call to start over with new cities
 '''
 
-# Allows user to attempt new cities
+# Allows user to attempt new cities rather than restarting
 def ask_for_new_cities():
     while True:
         try_again = input("\nDo you want to choose different cities? (y/n): ").lower()

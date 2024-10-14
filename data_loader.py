@@ -18,6 +18,7 @@ class DataLoader:
             city_coords[city] = (float(lat), float(lon))
         return city_coords
 
+    # Dictionary of lists : city names map to lists of adjacent cities
     def load_adjacency_list(self):
         graph = defaultdict(list)
         with open(self.adjacency_file, 'r') as file:

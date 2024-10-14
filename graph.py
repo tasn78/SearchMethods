@@ -70,6 +70,7 @@ class Graph:
         plt.tight_layout()  # Adjust layout to prevent label cut-off
         plt.show()
 
+
 '''
     # Created to show all algorithms on the same graph, but was too difficult to read due to overlapping
     # CHatGPT - Input this code to create the code above to make 1 graph per algorithm used "How do I change this code to only show one algorithm at a time?"

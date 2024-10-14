@@ -8,12 +8,12 @@ def main():
     coordinates_file = 'coordinates.csv'
     adjacency_file = 'adjacencies.txt'
 
-    # Loads the data
+    # Loads the data to create coordinates dictionary and adjacency dictionary of lists
     data_loader = DataLoader(coordinates_file, adjacency_file)
     city_coords = data_loader.load_coordinates()
     adjacency_list = data_loader.load_adjacency_list()
 
-    # Sets up the graph for visual
+    # Sets up the graph for visuals
     graph = Graph()
     for city1 in adjacency_list:
         for city2 in adjacency_list[city1]:
