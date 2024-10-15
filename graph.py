@@ -54,7 +54,7 @@ class Graph:
         nx.draw_networkx_edges(G, pos, edge_color='gray', width=1)
 
         # Plot the city names (labels) with increased font size
-        nx.draw_networkx_labels(G, pos, font_size=12, font_color='black', verticalalignment='bottom')
+        nx.draw_networkx_labels(G, pos, font_size=20, font_color='black', verticalalignment='bottom')
 
         # If a path is provided, highlight the path
         if path:
